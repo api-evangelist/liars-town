@@ -1,0 +1,15 @@
+generated: '2026-09-19'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: liars.town
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Nov 21 07:08:19 2026 GMT
+  hsts: false
+domains:
+- domain: liars.town
+  dnssec: false
+  caa: []
+  spf: false
+  dmarc: false

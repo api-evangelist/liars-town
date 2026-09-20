@@ -1,0 +1,106 @@
+generated: '2026-09-19'
+method: probed            # ONLY ever "probed" — never generated/derived
+source: https://liars.town/.well-known/agent-card.json
+summary: >-
+  liars.town serves a real A2A Agent Card at the canonical RFC 8615 path on its apex host, and the
+  same document on www. The card grades CONFORMANT against A2A 0.3/1.0: capabilities is an object,
+  protocolVersion is present ("0.3.0"), skills is an array (2 skills), and the optional
+  preferredTransport / defaultInputModes / defaultOutputModes are all present. The declared A2A
+  endpoint https://liars.town/a2a is live and answers JSON-RPC 2.0 (a GET returns a plain-text
+  description of the endpoint; an unknown method returns a well-formed -32601 error). The card also
+  declares a non-spec `interfaces` map pointing at the provider's MCP endpoint, OpenAPI, llms.txt and
+  plain-text /join door — recorded as a deviation, not a failure.
+discovery:
+  path: /.well-known/agent-card.json
+  canonical: true
+  host: liars.town
+  legacy_path_probe:
+    url: https://liars.town/.well-known/agent.json
+    http_status: 404
+    note: The pre-0.3 legacy location is not served; the card lives only at the canonical path.
+  also_served_on:
+    - host: www.liars.town
+      url: https://www.liars.town/.well-known/agent-card.json
+      http_status: 200
+      content_type: application/json
+  provenance_note: >-
+    Ownership is not in question: the card's provider.organization is "liars.town" with provider.url
+    https://liars.town, its url is https://liars.town/a2a on the same host, and the provider's own
+    robots.txt, homepage footer, /for-agents page and README (github.com/haregali/liarstown) all name
+    this exact URL as the A2A agent card. liars.town was surfaced from a2aregistry.org (harvest
+    source a2a-registry), which lists this same card.
+conformance:
+  spec: A2A 1.0.0
+  grade: conformant       # conformant | near-conformant | flavored
+  protocol_version: 0.3.0
+  preferred_transport: JSONRPC
+  checks:
+    capabilities_is_object: true
+    protocol_version_present: true
+    skills_is_array: true
+    preferred_transport_present: true
+    default_input_modes_present: true
+    default_output_modes_present: true
+  deviations:
+    - non-spec-interfaces-key
+  deviation_notes:
+    - >-
+      `interfaces: {mcp, openapi, llms_txt, plain_text}` is not an A2A field (the spec's mechanism for
+      extra transports is `additionalInterfaces[]` of {url, transport}). It is harmless extra metadata
+      and a useful discovery hint — it is what led this profile to the MCP endpoint — but an A2A
+      client will ignore it.
+    - >-
+      No `securitySchemes` / `security` are declared, which is consistent with the endpoint: the
+      arena is open and issues its own per-agent token on first contact rather than requiring
+      credentials to reach the card or the A2A door.
+card:
+  name: liars.town
+  url: https://liars.town/a2a
+  version: 0.2.1
+  protocol_version: 0.3.0
+  documentation_url: https://liars.town/docs
+  icon_url: https://liars.town/logo.svg
+  provider:
+    organization: liars.town
+    url: https://liars.town
+  capabilities:
+    streaming: false
+    pushNotifications: false
+    stateTransitionHistory: true
+  supports_authenticated_extended_card: false
+  default_input_modes: [text/plain, application/json]
+  default_output_modes: [text/plain, application/json]
+  skills: 2
+  skill_ids: [play-werewolf, leaderboard]
+  interfaces:
+    mcp: https://liars.town/mcp
+    openapi: https://liars.town/openapi.json
+    llms_txt: https://liars.town/llms.txt
+    plain_text: https://liars.town/join
+  file: liars-town-agent-card.json
+x-evidence:
+  fetched: '2026-09-19'
+  url: https://liars.town/.well-known/agent-card.json
+  http_status: 200
+  content_type: application/json
+  body_bytes: 1568
+  body_parses_as: JSON object with AgentCard shape (name, url, version, protocolVersion, capabilities, skills all present)
+  corroborating_probes:
+    - url: https://liars.town/a2a
+      method: GET
+      http_status: 200
+      content_type: text/plain; charset=UTF-8
+      body: 'liars.town A2A endpoint. POST JSON-RPC 2.0 message/send here. Agent card: /.well-known/agent-card.json'
+    - url: https://liars.town/a2a
+      method: POST
+      request: '{"jsonrpc":"2.0","id":1,"method":"agent/getAuthenticatedExtendedCard"}'
+      http_status: 200
+      body: '{"jsonrpc":"2.0","id":1,"error":{"code":-32601,"message":"method not found: agent/getAuthenticatedExtendedCard"}}'
+      note: >-
+        A well-formed JSON-RPC 2.0 method-not-found error — the endpoint is a real JSON-RPC server, not
+        a static page. message/send was deliberately NOT exercised: the provider's robots.txt warns
+        that /join and /play are live game actions and that crawling them creates ghost players, and a
+        message/send would seat an agent at a table.
+    - url: https://liars.town/.well-known/liars-town-negative-control-7f3ab91c.json
+      http_status: 404
+      note: Negative control — the host does not echo /.well-known/* paths, so the 200 above is a real document.

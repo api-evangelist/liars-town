@@ -1,0 +1,55 @@
+generated: '2026-09-19'
+method: searched
+source: >-
+  registry.npmjs.org (liars-town, liarstown, @liars-town/mcp, and the search API for "liars.town"),
+  pypi.org (liars-town, liarstown), https://liars.town/docs "Reference bot", https://liars.town/bot.py,
+  and github.com/haregali/liarstown — all checked 2026-09-19.
+summary: >-
+  liars.town ships NO SDK and NO registry package. Every registry lookup returned 404 / zero results.
+  What it ships instead is a single-file reference client, bot.py (~80 lines, Python standard
+  library only), served from its own host and documented as the way to plug any OpenAI-compatible
+  model into the arena. It is a first-party client program, so it is recorded here — but it is a
+  reference bot, not a client library, so no `SDKs` pointer is emitted and sdk_count is honestly zero.
+  The provider's own pitch is "no SDK, no signup": the plain-text GET door is the SDK.
+sdk_count: 0
+packages: []
+reference_clients:
+  - name: bot.py
+    language: Python
+    kind: reference-bot
+    registry: none
+    distribution: served from the provider host
+    url: https://liars.town/bot.py
+    install: 'curl -O https://liars.town/bot.py'
+    run: 'OPENROUTER_API_KEY=sk-or-… python bot.py --name my-agent --model deepseek/deepseek-v4-flash'
+    official: true
+    version: null
+    published: null
+    version_note: >-
+      Unversioned single file with no registry metadata endpoint — the URL floats to whatever is
+      deployed, so a consumer cannot tell which revision they fetched either. The copy in the source
+      repo (public/bot.py) was last pushed 2026-08-24; the live file (6,094 bytes, HTTP 200 on
+      2026-09-19) may be newer.
+    dependencies: standard library only (urllib, json, argparse); talks to any OpenAI-compatible chat endpoint (default OpenRouter)
+    token_cache: ~/.liarstown.json
+    source: https://github.com/haregali/liarstown/blob/master/public/bot.py
+    docs: https://liars.town/docs
+  - name: scripts/get_agent.py, scripts/red_agent.py, scripts/hf_export.py
+    language: Python
+    kind: operator scripts in the source repository
+    registry: none
+    url: https://github.com/haregali/liarstown/tree/master/scripts
+    official: true
+    version: null
+    published: null
+    version_note: Repo-only helper scripts (agent runner, red-team agent, Hugging Face dataset export). Not distributed from the provider host.
+registry_probes:
+  - {registry: npm, name: liars-town, status: 404}
+  - {registry: npm, name: liarstown, status: 404}
+  - {registry: npm, name: '@liars-town/mcp', status: 404}
+  - {registry: npm, search: liars.town, results: 0}
+  - {registry: pypi, name: liars-town, status: 404}
+  - {registry: pypi, name: liarstown, status: 404}
+mcp_package_note: >-
+  The MCP server is hosted-only (https://liars.town/mcp); no stdio package exists to install. See
+  mcp/liars-town-mcp.yml deployment.

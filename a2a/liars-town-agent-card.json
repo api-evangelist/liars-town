@@ -1,0 +1,95 @@
+{
+  "protocolVersion": "0.3.0",
+  "name": "AgentSearch",
+  "description": "Find AI agents and MCP servers by natural-language query. AgentSearch indexes ~3,700 hosted agents daily, probes each for reachability, scores them on reputation + usability + functionality, and returns the best matches for your task with per-agent reasoning. Use it to answer 'is there an agent that does X?' or 'is this specific agent any good?'. Read-only, free, no auth.",
+  "url": "https://agentsearch.luthersystems.com/api/a2a",
+  "version": "0.1.0",
+  "provider": {
+    "organization": "Luther Systems",
+    "url": "https://luthersystems.com"
+  },
+  "documentationUrl": "https://github.com/luthersystems/agentsearch",
+  "homepage": "https://agentsearch.luthersystems.com",
+  "license": { "spdx_id": "MIT", "name": "MIT License", "url": "https://github.com/luthersystems/agentsearch/blob/main/LICENSE" },
+  "pricing": { "model": "free", "rateLimit": "best-effort, ~60 requests per minute per IP" },
+  "securitySchemes": { "public": { "type": "none", "description": "All endpoints are publicly readable, no auth required." } },
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": false,
+    "stateTransitionHistory": false
+  },
+  "additionalInterfaces": [
+    { "transport": "jsonrpc", "url": "https://agentsearch.luthersystems.com/api/a2a" },
+    { "transport": "mcp-streamable-http", "url": "https://agentsearch.luthersystems.com/api/mcp" },
+    { "transport": "mcp-stdio", "url": "npx://-y/@luthersystems/agentsearch" }
+  ],
+  "defaultInputModes": ["text/plain", "application/json"],
+  "defaultOutputModes": ["application/json"],
+  "skills": [
+    {
+      "id": "search",
+      "name": "Search the agent index",
+      "description": "Take a natural-language query and return the top ranked agents/MCP servers from the index, with per-agent reasoning. Ranked by final_score = query_fit × agent_quality.",
+      "tags": ["search", "discovery", "ranking", "agent-discovery", "mcp-discovery"],
+      "examples": [
+        "find an agent that reads invoice PDFs",
+        "what MCP server lets me control a browser",
+        "agents for crypto price lookup"
+      ],
+      "inputModes": ["text/plain", "application/json"],
+      "outputModes": ["application/json"]
+    },
+    {
+      "id": "agent_details",
+      "name": "Get a scored agent profile",
+      "description": "Return the full scored profile for one named indexed agent: inventory data, layer-by-layer scores (Fame / Usability / Functionality / Call Graph), reasoning, and live blocker status.",
+      "tags": ["details", "profile", "scoring"],
+      "examples": [
+        "details for upstash/context7",
+        "how does taylorwilsdon/google_workspace_mcp score",
+        "show me the Fame breakdown for a2aproject/A2A"
+      ],
+      "inputModes": ["text/plain", "application/json"],
+      "outputModes": ["application/json"]
+    },
+    {
+      "id": "found_agent",
+      "name": "Live-score an arbitrary agent URL",
+      "description": "Crawl + probe + LLM-score an arbitrary agent URL using the same rubric the batch pipeline uses. Works for agents not (yet) in the index.",
+      "tags": ["scoring", "live", "probe", "agent-evaluation"],
+      "examples": [
+        "score https://github.com/example/new-mcp-server",
+        "evaluate https://some-new-agent.com against the query 'edit calendar events'",
+        "is https://acme.com/agent/api any good?"
+      ],
+      "inputModes": ["application/json"],
+      "outputModes": ["application/json"]
+    },
+    {
+      "id": "browse",
+      "name": "Browse the full index",
+      "description": "Paginated list of every indexed agent, ranked by overall quality.",
+      "tags": ["browse", "list", "rank"],
+      "examples": [
+        "top 50 agents by overall score",
+        "page 5 of the index",
+        "list everything ranked"
+      ],
+      "inputModes": ["text/plain", "application/json"],
+      "outputModes": ["application/json"]
+    },
+    {
+      "id": "stats",
+      "name": "Index summary stats",
+      "description": "Distributions, top categories, and the agent-to-agent call graph for the whole index.",
+      "tags": ["stats", "rollups", "graph"],
+      "examples": [
+        "how many agents are reachable right now?",
+        "what are the top capability clusters?",
+        "license breakdown across the index"
+      ],
+      "inputModes": ["text/plain", "application/json"],
+      "outputModes": ["application/json"]
+    }
+  ]
+}

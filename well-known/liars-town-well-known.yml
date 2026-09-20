@@ -1,0 +1,95 @@
+generated: '2026-09-19'
+method: probed
+source: live probes of the named /.well-known/ paths on every liars.town host, 2026-09-19
+summary: >-
+  liars.town serves TWO real well-known documents on its apex host: an A2A agent card at
+  /.well-known/agent-card.json (1,568 bytes, application/json — graded in a2a/liars-town-a2a.yml)
+  and an OpenAI-style plugin manifest at /.well-known/ai-plugin.json (753 bytes, application/json,
+  auth.type none, api.url https://liars.town/openapi.json). Both are saved verbatim below. Everything
+  else in the closed path list is a clean 404 — no security.txt (so NO SecurityTxt pointer), no OIDC
+  or OAuth metadata, no api-catalog, no apis.json, no AAuth, no UCP/ACP. The host is a Cloudflare
+  Worker with an explicit run_worker_first rule for /.well-known/*, and the negative-control path
+  404s, so the two 200s are real documents and not a catch-all.
+pointer_basis: >-
+  WellKnown pointer emitted on the strength of two served documents (agent-card.json, ai-plugin.json).
+  SecurityTxt NOT emitted — RFC 9116 is unimplemented on both hosts. APICatalog NOT emitted —
+  /.well-known/api-catalog 404s.
+path_echo_control: passed
+hosts:
+  - host: https://liars.town
+    role: apex — website, REST base, OpenAPI servers[], MCP endpoint, A2A endpoint, docs (all one host)
+    documents:
+      - path: /.well-known/agent-card.json
+        status: 200
+        content_type: application/json
+        bytes: 1568
+        file: liars-town-agent-card.json
+        note: Real A2A card; verbatim copy also at a2a/liars-town-agent-card.json where it is graded.
+      - path: /.well-known/agent.json
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 200
+        content_type: application/json
+        bytes: 753
+        file: liars-town-ai-plugin.json
+        note: 'schema_version v1; auth.type none; api.type openapi -> https://liars.town/openapi.json; contact_email crier@liars.town.'
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/oauth-protected-resource
+        status: 404
+      - path: /.well-known/oauth-protected-resource/mcp
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/api-catalog.json
+        status: 404
+      - path: /.well-known/apis.json
+        status: 404
+      - path: /apis.json
+        status: 404
+      - path: /apis.yml
+        status: 404
+      - path: /.well-known/aauth-resource.json
+        status: 404
+      - path: /.well-known/ucp.json
+        status: 404
+      - path: /.well-known/acp.json
+        status: 404
+      - path: /.well-known/mcp.json
+        status: 404
+      - path: /.well-known/liars-town-negative-control-7f3ab91c.json
+        status: 404
+        note: Negative control — a path that cannot exist. 404 confirms the host does not echo /.well-known/* requests.
+  - host: https://www.liars.town
+    role: alias — same Worker, same content (no redirect to the apex; both answer 200 directly)
+    documents:
+      - path: /.well-known/agent-card.json
+        status: 200
+        content_type: application/json
+        bytes: 1612
+        file: liars-town-agent-card.json
+        note: Same card served on the alias host; the apex copy is the one saved.
+      - path: /.well-known/security.txt
+        status: 404
+other_discovery_surfaces:
+  # Not /.well-known/, but the same class of agent-discovery document — recorded here for the reader.
+  - url: https://liars.town/llms.txt
+    status: 200
+    file: ../llms/liars-town-llms.txt
+  - url: https://liars.town/openapi.json
+    status: 200
+    file: ../openapi/_original/liars-town-openapi.json
+  - url: https://liars.town/SKILL.md
+    status: 200
+    file: ../skills/liars-town-SKILL.md
+    note: Also served at /skill.md (identical bytes).
+  - url: https://liars.town/robots.txt
+    status: 200
+    note: 'Allows all agents; Disallow /join and /play because they are live game actions; lists llms.txt and the agent card as "agent-readable entry points".'
+  - url: https://liars.town/sitemap.xml
+    status: 200
+    note: 506 URLs — six site pages plus every archived game transcript.

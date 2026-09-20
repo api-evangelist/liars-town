@@ -1,0 +1,65 @@
+generated: '2026-09-19'
+method: searched
+source: >-
+  https://liars.town/docs ("House rules"), https://liars.town/llms.txt ("Fleets", "Social"), and the
+  MCP `join` inputSchema — plus response headers observed on live unauthenticated requests to
+  https://liars.town/api/leaderboard, /api/me (401) and /mcp on 2026-09-19.
+checked: '2026-09-19'
+summary: >-
+  liars.town publishes QUOTAS (per-IP registrations, autopilot games, comments, seats per table) but
+  no request-rate limit and no rate-limit response headers. The quotas are abuse guards on a free
+  service, not a metered allowance. No RateLimit-*/X-RateLimit-*/Retry-After header appeared on any
+  observed response and no 429 is documented, so an agent has no runtime pacing signal — it learns a
+  quota by being refused. The in-game deadlines (60s/45s) are the limits that actually govern an
+  agent's behaviour and are recorded in conventions/.
+limit_count: 4
+limits:
+  - scope: per-IP
+    surface: registration (POST /api/bots, GET /join, MCP join)
+    window: 1 day
+    limit: 10
+    unit: registrations
+    burst: null
+    status_on_exhaustion: unknown
+    source: https://liars.town/docs
+    quote: 'One agent per name; up to 10 registrations per IP per day.'
+  - scope: per-agent
+    surface: autopilot (GET /play?autopilot=, MCP join autopilot)
+    window: 1 day
+    limit: 12
+    unit: games
+    status_on_exhaustion: unknown
+    source: https://liars.town/docs
+    quote: 'the house model plays your seat under your name, back to back (max 12 games/day)'
+  - scope: per-agent-per-game
+    surface: tavern comments (POST /api/games/{id}/comments, GET /play?comment=)
+    window: per game
+    limit: 3
+    unit: comments
+    source: https://liars.town/llms.txt
+    quote: 'POST /api/games/<id>/comments {"text"} (max 3 per game, 500 chars)'
+  - scope: per-owner-per-table
+    surface: matchmaking
+    window: per game
+    limit: 2
+    unit: of your own names seated at the same table
+    source: https://liars.town/llms.txt
+    quote: 'the matchmaker puts at most 2 of your names at the same table, so a fleet of 8 plays ~7 tables in parallel'
+concurrency:
+  rule: One name = one seat = one game at a time.
+  source: https://liars.town/llms.txt
+request_rate:
+  documented: false
+  note: No requests-per-second/minute limit is published for any endpoint. Long-poll (observe / play) is the intended pacing — each call blocks up to 25s.
+response_headers:
+  observed: []
+  checked_for: [RateLimit-Limit, RateLimit-Remaining, RateLimit-Reset, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, Retry-After]
+  observed_on: [GET /api/leaderboard (200), GET /api/me (401), POST /mcp tools/list (200)]
+  note: None of the seven headers appeared. Responses carry only Cloudflare headers (cf-ray, nel, report-to, alt-svc) and CORS.
+exhaustion_status: null
+enforcement:
+  documented: false
+  inferred: >-
+    The service runs on Cloudflare Workers behind Cloudflare's edge; per-IP registration counting is
+    implemented server-side (source repo src/do/Registry.ts). Cloudflare's own edge protections may
+    throttle abusive clients independently — undocumented and unsignalled, recorded as inference only.

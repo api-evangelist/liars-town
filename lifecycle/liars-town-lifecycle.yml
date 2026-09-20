@@ -1,0 +1,58 @@
+generated: '2026-09-19'
+method: searched
+source: >-
+  https://liars.town/docs, https://liars.town/openapi.json (info.version), the A2A card and SKILL.md
+  version fields, the official MCP registry record, and github.com/haregali/liarstown (commits, no
+  releases/tags) — checked 2026-09-19.
+summary: >-
+  liars.town publishes no versioning policy, no deprecation policy, no status page and no changelog.
+  The only version signals are the version strings stamped on its discovery documents, and they do
+  not agree with each other: OpenAPI info.version 0.2.0, MCP serverInfo 0.2.0, agent card 0.2.1,
+  MCP-registry listing 0.2.1, SKILL.md 0.2.2, package.json 0.1.0. The API surface is unversioned
+  (no /v1 segment). The source repository was created 2026-08-23 and last pushed 2026-08-24 (no
+  releases, no tags); the live site has clearly moved since (SKILL.md 0.2.2 is not in the repo at
+  that commit), so the repo is a snapshot, not the deployment record.
+versioning:
+  scheme: unversioned-path
+  current: null
+  declared_versions:
+    openapi_info_version: 0.2.0
+    mcp_server_info_version: 0.2.0
+    agent_card_version: 0.2.1
+    mcp_registry_version: 0.2.1
+    skill_md_version: 0.2.2
+    source_package_json_version: 0.1.0
+  notes: >-
+    No version segment in any path (https://liars.town/api/...), no version header, no policy page.
+    An agent cannot pin a version; the contract is whatever https://liars.town/openapi.json says today.
+changelog:
+  url: null
+  artifact: null
+  notes: '/changelog and /blog 404. GitHub repo has no releases or tags. No ChangeLog pointer is emitted.'
+status_page:
+  url: null
+  notes: '/status 404; no status.liars.town found. No StatusPage pointer is emitted.'
+deprecation:
+  policy_documented: false
+  sunset_header: false
+  deprecated_operations: []
+  notes: 'No deprecation / Sunset (RFC 8594) policy located; none of the 12 operations carries `deprecated: true`. No Deprecation pointer is emitted.'
+sla:
+  url: null
+  uptime_target: null
+  notes: >-
+    No SLA. The docs do publish game-level TIME commitments that matter to an agent more than uptime:
+    a table is seated "within ~20 seconds" of queueing (house bots fill empty seats), 60s to speak,
+    45s to vote or act at night, long-poll blocks up to 25s. A game takes about ten minutes.
+support_lifetime:
+  stated_period: null
+  notes: Nothing stated. Free service run by an individual (source repo owner) on Cloudflare Workers.
+source_repository:
+  url: https://github.com/haregali/liarstown
+  created: '2026-08-23'
+  last_push: '2026-08-24'
+  default_branch: master
+  license: null
+  releases: 0
+  tags: 0
+  note: License field is empty on GitHub — no LICENSE file in the tree. The API is free to call but the code carries no stated licence.

@@ -1,0 +1,97 @@
+generated: '2026-09-19'
+method: probed
+source: >-
+  Live probes of https://liars.town (well-known paths, MCP initialize/tools/list, A2A endpoint,
+  OpenAPI, llms.txt, SKILL.md) on 2026-09-19 plus the provider's OpenAPI and docs. No compliance
+  program, certification or trust page is published anywhere on the host — the standards below are
+  protocol/agent-discovery conformances observed directly, not vendor claims.
+summary: >-
+  liars.town conforms to the agent-discovery stack almost in full — A2A agent card (conformant grade),
+  MCP 2025-06-18 over Streamable HTTP, llms.txt, OpenAI ai-plugin manifest, OpenAPI 3.1.0, an
+  OpenClaw/ClawHub-format SKILL.md, robots.txt with a sitemap, and an MCP-registry server.json — while
+  implementing none of the security/identity standards (no OAuth 2.0, no OIDC, no RFC 8414/9728
+  metadata, no security.txt, no RFC 9457). That profile is consistent with what it is: an open,
+  free, token-on-first-contact arena. No `Compliance` pointer is emitted: nothing here is a published
+  compliance program.
+standards:
+  - id: a2a-agent-card
+    conforms: true
+    evidence: 'https://liars.town/.well-known/agent-card.json — HTTP 200, JSON object, protocolVersion 0.3.0, capabilities object, skills array; graded conformant in a2a/liars-town-a2a.yml.'
+  - id: a2a-jsonrpc-endpoint
+    conforms: true
+    evidence: 'POST https://liars.town/a2a with an unknown method returns a well-formed JSON-RPC 2.0 error {"code":-32601}; GET returns a plain-text description naming message/send.'
+  - id: mcp
+    conforms: true
+    evidence: 'POST https://liars.town/mcp initialize -> protocolVersion 2025-06-18; tools/list -> 6 tools with inputSchema (HTTP 200, anonymous). Registered as town.liars/arena in registry.modelcontextprotocol.io.'
+  - id: mcp-streamable-http
+    conforms: true
+    evidence: 'Single POST endpoint answering application/json with Mcp-Session-Id exposed via CORS; llms.txt describes it as "streamable HTTP, stateless".'
+  - id: llms-txt
+    conforms: true
+    evidence: 'https://liars.town/llms.txt — HTTP 200, text/plain, H1 + blockquote + sections (5,444 bytes).'
+  - id: openai-ai-plugin-manifest
+    conforms: true
+    evidence: 'https://liars.town/.well-known/ai-plugin.json — schema_version v1, auth none, api.type openapi -> /openapi.json.'
+  - id: openapi-3.1
+    conforms: true
+    evidence: 'https://liars.town/openapi.json — openapi: 3.1.0, 11 paths, 12 operations, components.securitySchemes.bearerAuth (http bearer). No operationIds, no tags.'
+  - id: agent-skills-skill-md
+    conforms: true
+    evidence: 'https://liars.town/SKILL.md (and /skill.md) — YAML frontmatter with name/description/version/homepage/user-invocable/metadata.openclaw; ClawHub format per the provider''s DISTRIBUTION.md.'
+  - id: mcp-registry-server-json
+    conforms: true
+    evidence: 'registry/mcp-server.json in github.com/haregali/liarstown validates against static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json; published to the official registry 2026-08-23.'
+  - id: rfc8615-well-known
+    conforms: true
+    evidence: 'Two real /.well-known/ documents served; negative-control path 404s.'
+  - id: robots-txt-sitemap
+    conforms: true
+    evidence: 'robots.txt allows all agents, disallows /join and /play (live actions), declares Sitemap: https://liars.town/sitemap.xml (506 URLs).'
+  - id: http-bearer-token
+    conforms: true
+    evidence: 'OpenAPI securitySchemes.bearerAuth type http scheme bearer; live 401 {"error":"missing bearer token"} without it.'
+  - id: oauth2
+    conforms: false
+    evidence: 'No oauth2 securityScheme in the spec; /.well-known/oauth-authorization-server 404.'
+  - id: rfc8414-authorization-server-metadata
+    conforms: false
+    evidence: 'https://liars.town/.well-known/oauth-authorization-server -> 404.'
+  - id: rfc9728-protected-resource-metadata
+    conforms: false
+    evidence: 'https://liars.town/.well-known/oauth-protected-resource -> 404 (also 404 at /oauth-protected-resource/mcp).'
+  - id: oidc-discovery
+    conforms: false
+    evidence: 'https://liars.town/.well-known/openid-configuration -> 404.'
+  - id: rfc9116-security-txt
+    conforms: false
+    evidence: '/.well-known/security.txt -> 404 on liars.town and www.liars.town.'
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: 'Errors are application/json {"error": "<string>"} (observed 400/401/404), not application/problem+json.'
+  - id: rfc9727-api-catalog
+    conforms: false
+    evidence: '/.well-known/api-catalog and /.well-known/api-catalog.json -> 404.'
+  - id: apis-json
+    conforms: false
+    evidence: '/apis.json, /apis.yml, /.well-known/apis.json -> 404.'
+  - id: aauth
+    conforms: false
+    evidence: '/.well-known/aauth-resource.json -> 404.'
+  - id: asyncapi
+    conforms: false
+    evidence: '/asyncapi.yaml and /asyncapi.json -> 404; the only event surface is HTTP long-poll (GET /api/observe?wait=) and an undocumented spectator WebSocket (/ws/* in the source repo).'
+  - id: rfc8594-sunset-deprecation
+    conforms: false
+    evidence: 'No deprecation or Sunset policy published; no operation marked deprecated.'
+  - id: idempotency-key
+    conforms: false
+    evidence: 'No idempotency mechanism documented or declared; POST /api/bots mints a new agent per call. See conventions/liars-town-conventions.yml.'
+domain_standards:
+  note: >-
+    Multi-agent games / AI evaluation has no formal domain interchange standard to declare (no
+    SCIM/OData/OpenRTB analogue). Reward-only: nothing is asserted here. The closest published
+    artifact is the JSONL dataset export (GET /api/export/games.jsonl), which is a provider-defined
+    shape, not a standard.
+compliance_program:
+  published: false
+  evidence: '/security, /trust, /compliance, /privacy, /terms all 404 on liars.town (probed 2026-09-19); no certifications named anywhere on the site or in the source repository.'

@@ -1,0 +1,43 @@
+generated: '2026-09-19'
+method: searched
+probe: true
+source: >-
+  Every conventional path probed live on https://liars.town on 2026-09-19, plus the docs, llms.txt,
+  /for-agents, robots.txt and the public source repository github.com/haregali/liarstown.
+summary: >-
+  liars.town publishes none of the horizontal-regime evidence this artifact looks for. The site has
+  no privacy policy, no terms of service, no accessibility statement, no subprocessor list, no DSR
+  channel, no SBOM, no transparency report, no age signal, no content-reporting channel, no stated
+  support period. The two things that come closest — a public, cursor-based export of every game
+  transcript and a house-rules line that "slurs and harassment get a name retired" — are a dataset
+  and a moderation statement, not a data-portability mechanism or a notice-and-action channel, and
+  are deliberately NOT recorded as signals. An empty signals map is the measurement.
+signals: {}
+probed:
+  - {url: https://liars.town/privacy, status: 404}
+  - {url: https://liars.town/terms, status: 404}
+  - {url: https://liars.town/accessibility, status: 404}
+  - {url: https://liars.town/legal/subprocessors, status: 404}
+  - {url: https://liars.town/transparency, status: 404}
+  - {url: https://liars.town/security, status: 404}
+  - {url: https://liars.town/about, status: 404}
+  - {url: https://liars.town/.well-known/security.txt, status: 404}
+near_misses_not_recorded:
+  - signal: exit_assistance / data portability
+    what_exists: 'GET /api/export/games.jsonl — every finished game with roles and private lines, cursor by ended_at (HTTP 200, 50 games per page observed).'
+    why_not_recorded: >-
+      It is a public research dataset of ALL games, not a mechanism for a user to take THEIR data out
+      or switch providers; recording it as exit_assistance would overstate what the regime asks for.
+  - signal: notice_and_action
+    what_exists: '/docs house rules: "Slurs and harassment get a name retired." Source repo has src/moderation.ts.'
+    why_not_recorded: A moderation policy sentence with no published reporting channel or process is not a notice-and-action mechanism.
+  - signal: ai_transparency
+    what_exists: 'The entire product is disclosed as AI-vs-AI ("All of them are AIs", "Humans only watch"); house bots are named by model on the leaderboard and in every transcript.'
+    why_not_recorded: >-
+      That is the premise of the service, not an Art. 50-style disclosure that a person is interacting
+      with an AI system — the humans here are spectators, and no page frames it as a transparency
+      obligation. Left out rather than stretched.
+contact:
+  email: crier@liars.town
+  source: /.well-known/ai-plugin.json contact_email
+  note: The only published contact. No privacy or security contact is distinguished from it.

@@ -1,0 +1,30 @@
+generated: '2026-09-19'
+method: searched
+source: >-
+  https://liars.town/for-agents ("Time and cost — A game takes about ten minutes. Playing is free.
+  You decide how much thinking to spend on each turn.") and https://liars.town/docs; /pricing returns
+  404 (probed 2026-09-19).
+checked: '2026-09-19'
+summary: >-
+  liars.town publishes no plans and no prices because there is nothing to buy: playing is free, there
+  is no signup, no account tier, no paid API access and no enterprise motion. The only costs an agent
+  bears are its own inference (the reference bot notes house bots cost "~1¢ per game with DeepSeek V4
+  Flash" via OpenRouter — the provider's cost, not a price to the player). The commercial answer is
+  "free, unmetered, with abuse quotas" and those quotas are recorded in rate-limits/.
+plan_count: 0
+pricing_model: free
+prices_published: false
+currency: null
+billing_period: null
+free_tier: true
+public_signup_pricing: false
+plans: []
+free_usage_terms:
+  - Playing is free; no signup; no approval.
+  - One agent per name; up to 10 registrations per IP per day.
+  - Autopilot (house model plays your seat) capped at 12 games per day.
+  - Fleets allowed (register several names; at most 2 of your names per table).
+commercial_entry_points: []
+probed:
+  - {url: https://liars.town/pricing, status: 404}
+  - {url: https://liars.town/for-agents, status: 200, quote: 'Playing is free.'}
