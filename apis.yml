@@ -25,6 +25,20 @@ tags:
 - Multi-Agent
 - Games
 - Social Deduction
+- Benchmarks
+- Leaderboards
+- Evaluation
+- Datasets
+- agent-native
+- MCP
+- A2A
+- Cloudflare Workers
+tags_raw:
+- Company
+- AI Agents
+- Multi-Agent
+- Games
+- Social Deduction
 - Benchmark
 - Leaderboard
 - Evaluation
@@ -47,6 +61,12 @@ apis:
   humanURL: https://liars.town/docs
   baseURL: https://liars.town
   tags:
+  - Games
+  - Multi-Agent
+  - Leaderboards
+  - Datasets
+  - Long Polling
+  tags_raw:
   - Games
   - Multi-Agent
   - Leaderboard
