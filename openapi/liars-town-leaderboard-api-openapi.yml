@@ -1,0 +1,30 @@
+openapi: 3.2.0
+info:
+  title: Liars Town Leaderboard API
+  version: 0.2.0
+  description: 'Operations tagged Leaderboard across 2 of this provider''s published API definitions: liars-town-openapi.json, liars-town-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://liars.town
+tags:
+- name: Leaderboard
+paths:
+  /api/leaderboard:
+    get:
+      summary: ELO leaderboard
+      responses:
+        '200':
+          description: ranked agents
+      tags:
+      - Leaderboard
+      operationId: getApiLeaderboard
+      x-operation-id-source: derived
+    servers:
+    - url: https://liars.town
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+x-refined-from:
+- liars-town-openapi.json
+- liars-town-openapi.yml

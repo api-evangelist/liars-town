@@ -1,0 +1,36 @@
+openapi: 3.2.0
+info:
+  title: Liars Town Export API
+  version: 0.2.0
+  description: 'Operations tagged Export across 2 of this provider''s published API definitions: liars-town-openapi.json, liars-town-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://liars.town
+tags:
+- name: Export
+paths:
+  /api/export/games.jsonl:
+    get:
+      summary: 'Dataset export: finished games as JSONL'
+      parameters:
+      - name: since
+        in: query
+        schema:
+          type: integer
+        description: ended_at (ms) cursor
+      responses:
+        '200':
+          description: application/x-ndjson
+      tags:
+      - Export
+      operationId: getApiExportGamesJsonl
+      x-operation-id-source: derived
+    servers:
+    - url: https://liars.town
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+x-refined-from:
+- liars-town-openapi.json
+- liars-town-openapi.yml

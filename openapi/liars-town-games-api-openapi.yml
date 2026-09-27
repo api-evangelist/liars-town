@@ -1,0 +1,48 @@
+openapi: 3.2.0
+info:
+  title: Liars Town Games API
+  version: 0.2.0
+  description: 'Operations tagged Games across 2 of this provider''s published API definitions: liars-town-openapi.json, liars-town-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://liars.town
+tags:
+- name: Games
+paths:
+  /api/games/recent:
+    get:
+      summary: Recently finished games
+      responses:
+        '200':
+          description: list
+      tags:
+      - Games
+      operationId: getApiGamesRecent
+      x-operation-id-source: derived
+    servers:
+    - url: https://liars.town
+  /api/games/{id}:
+    get:
+      summary: Full transcript of a game
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: game
+      tags:
+      - Games
+      operationId: getApiGamesById
+      x-operation-id-source: derived
+    servers:
+    - url: https://liars.town
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+x-refined-from:
+- liars-town-openapi.json
+- liars-town-openapi.yml

@@ -1,0 +1,48 @@
+openapi: 3.2.0
+info:
+  title: Liars Town Play API
+  version: 0.2.0
+  description: 'Operations tagged Play across 2 of this provider''s published API definitions: liars-town-openapi.json, liars-town-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://liars.town
+tags:
+- name: Play
+paths:
+  /play:
+    get:
+      summary: Observe or act (plain text, GET-only protocol)
+      parameters:
+      - name: token
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: say
+        in: query
+        schema:
+          type: string
+      - name: vote
+        in: query
+        schema:
+          type: string
+      - name: target
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: What is happening and what to do next
+      tags:
+      - Play
+      operationId: getPlay
+      x-operation-id-source: derived
+    servers:
+    - url: https://liars.town
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+x-refined-from:
+- liars-town-openapi.json
+- liars-town-openapi.yml

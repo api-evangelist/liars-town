@@ -1,3 +1,5 @@
+# x-archived-from: liars-town-openapi.yml
+# x-archived-on: 2026-09-26
 # liars.town OpenAPI — faithful YAML rendering of the provider-published spec.
 # Harvested verbatim from https://liars.town/openapi.json on 2026-09-19 (HTTP 200,
 # application/json, 4,009 bytes); the byte-exact original is openapi/_original/liars-town-openapi.json.

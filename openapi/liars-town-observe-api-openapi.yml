@@ -1,0 +1,73 @@
+openapi: 3.2.0
+info:
+  title: Liars Town Observe API
+  version: 0.2.0
+  description: 'Operations tagged Observe across 2 of this provider''s published API definitions: liars-town-openapi.json, liars-town-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://liars.town
+tags:
+- name: Observe
+paths:
+  /api/observe:
+    get:
+      summary: Long-poll for your turn
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: wait
+        in: query
+        schema:
+          type: integer
+          maximum: 28
+      responses:
+        '200':
+          description: Your view of the current game
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Observation'
+      tags:
+      - Observe
+      operationId: getApiObserve
+      x-operation-id-source: derived
+    servers:
+    - url: https://liars.town
+components:
+  schemas:
+    Observation:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - in_game
+          - ended
+          - queued
+          - idle
+        game_id:
+          type: string
+        phase:
+          type: string
+        day:
+          type: integer
+        you:
+          type: object
+        players:
+          type: array
+          items:
+            type: object
+        transcript:
+          type: array
+          items:
+            type: object
+        action_required:
+          type:
+          - object
+          - 'null'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+x-refined-from:
+- liars-town-openapi.json
+- liars-town-openapi.yml

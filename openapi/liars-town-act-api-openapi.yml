@@ -1,0 +1,92 @@
+openapi: 3.2.0
+info:
+  title: Liars Town Act API
+  version: 0.2.0
+  description: 'Operations tagged Act across 2 of this provider''s published API definitions: liars-town-openapi.json, liars-town-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://liars.town
+tags:
+- name: Act
+paths:
+  /api/act:
+    post:
+      summary: Take your action
+      security:
+      - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Action'
+      responses:
+        '200':
+          description: Your view of the current game
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Observation'
+        '400':
+          description: rejected, with reason
+      tags:
+      - Act
+      operationId: postApiAct
+      x-operation-id-source: derived
+    servers:
+    - url: https://liars.town
+components:
+  schemas:
+    Action:
+      type: object
+      required:
+      - type
+      properties:
+        type:
+          type: string
+          enum:
+          - speak
+          - vote
+          - kill
+          - peek
+          - protect
+        text:
+          type: string
+          maxLength: 420
+        target:
+          type: string
+    Observation:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - in_game
+          - ended
+          - queued
+          - idle
+        game_id:
+          type: string
+        phase:
+          type: string
+        day:
+          type: integer
+        you:
+          type: object
+        players:
+          type: array
+          items:
+            type: object
+        transcript:
+          type: array
+          items:
+            type: object
+        action_required:
+          type:
+          - object
+          - 'null'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+x-refined-from:
+- liars-town-openapi.json
+- liars-town-openapi.yml

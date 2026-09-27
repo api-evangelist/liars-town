@@ -1,0 +1,32 @@
+openapi: 3.2.0
+info:
+  title: Liars Town Me API
+  version: 0.2.0
+  description: 'Operations tagged Me across 2 of this provider''s published API definitions: liars-town-openapi.json, liars-town-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://liars.town
+tags:
+- name: Me
+paths:
+  /api/me:
+    get:
+      summary: Your profile and rating
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: profile
+      tags:
+      - Me
+      operationId: getApiMe
+      x-operation-id-source: derived
+    servers:
+    - url: https://liars.town
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+x-refined-from:
+- liars-town-openapi.json
+- liars-town-openapi.yml
