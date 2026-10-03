@@ -1,8 +1,7 @@
 {
   "provider": "liars-town",
   "sources": [
-    "_original/liars-town-openapi.json",
-    "liars-town-openapi.yml"
+    "_original/liars-town-openapi.json"
   ],
   "outputs": [
     "liars-town-act-api-openapi.yml",
@@ -16,12 +15,11 @@
     "liars-town-play-api-openapi.yml",
     "liars-town-queue-api-openapi.yml"
   ],
-  "archived": [
-    "archived openapi/liars-town-openapi.yml"
-  ],
+  "archived": [],
   "errors": [],
   "warnings": [],
   "notes": [
+    "1 archived document(s) dropped as subsets of other archived documents",
     "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
     "liars-town-openapi.json: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "liars-town-openapi.json: tagged paths GET /join -> Join",
@@ -46,40 +44,19 @@
     "liars-town-openapi.json: declared missing tag: Observe",
     "liars-town-openapi.json: declared missing tag: Play",
     "liars-town-openapi.json: declared missing tag: Queue",
-    "liars-town-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "liars-town-openapi.yml: tagged paths GET /join -> Join",
-    "liars-town-openapi.yml: tagged paths GET /play -> Play",
-    "liars-town-openapi.yml: tagged paths POST /api/bots -> Bots",
-    "liars-town-openapi.yml: tagged paths POST /api/queue -> Queue",
-    "liars-town-openapi.yml: tagged paths DELETE /api/queue -> Queue",
-    "liars-town-openapi.yml: tagged paths GET /api/observe -> Observe",
-    "liars-town-openapi.yml: tagged paths POST /api/act -> Act",
-    "liars-town-openapi.yml: tagged paths GET /api/me -> Me",
-    "liars-town-openapi.yml: tagged paths GET /api/leaderboard -> Leaderboard",
-    "liars-town-openapi.yml: tagged paths GET /api/games/recent -> Games",
-    "liars-town-openapi.yml: tagged paths GET /api/games/{id} -> Games",
-    "liars-town-openapi.yml: tagged paths GET /api/export/games.jsonl -> Export",
-    "liars-town-openapi.yml: declared missing tag: Act",
-    "liars-town-openapi.yml: declared missing tag: Bots",
-    "liars-town-openapi.yml: declared missing tag: Export",
-    "liars-town-openapi.yml: declared missing tag: Games",
-    "liars-town-openapi.yml: declared missing tag: Join",
-    "liars-town-openapi.yml: declared missing tag: Leaderboard",
-    "liars-town-openapi.yml: declared missing tag: Me",
-    "liars-town-openapi.yml: declared missing tag: Observe",
-    "liars-town-openapi.yml: declared missing tag: Play",
-    "liars-town-openapi.yml: declared missing tag: Queue",
-    "tag 'Act' spans 2 source specs (liars-town-openapi.json, liars-town-openapi.yml): per-path servers applied",
-    "tag 'Bots' spans 2 source specs (liars-town-openapi.json, liars-town-openapi.yml): per-path servers applied",
-    "tag 'Export' spans 2 source specs (liars-town-openapi.json, liars-town-openapi.yml): per-path servers applied",
-    "tag 'Games' spans 2 source specs (liars-town-openapi.json, liars-town-openapi.yml): per-path servers applied",
-    "tag 'Join' spans 2 source specs (liars-town-openapi.json, liars-town-openapi.yml): per-path servers applied",
-    "tag 'Leaderboard' spans 2 source specs (liars-town-openapi.json, liars-town-openapi.yml): per-path servers applied",
-    "tag 'Me' spans 2 source specs (liars-town-openapi.json, liars-town-openapi.yml): per-path servers applied",
-    "tag 'Observe' spans 2 source specs (liars-town-openapi.json, liars-town-openapi.yml): per-path servers applied",
-    "tag 'Play' spans 2 source specs (liars-town-openapi.json, liars-town-openapi.yml): per-path servers applied",
-    "tag 'Queue' spans 2 source specs (liars-town-openapi.json, liars-town-openapi.yml): per-path servers applied",
-    "apis.yml register: written (+10 apis, 12 total)"
+    "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "_original/liars-town-openapi.yml: archived document superseded by a larger archived document",
+    "liars-town-act-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "liars-town-bots-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "liars-town-export-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "liars-town-games-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "liars-town-join-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "liars-town-leaderboard-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "liars-town-me-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "liars-town-observe-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "liars-town-play-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "liars-town-queue-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
