@@ -33,24 +33,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    Action:
-      type: object
-      required:
-      - type
-      properties:
-        type:
-          type: string
-          enum:
-          - speak
-          - vote
-          - kill
-          - peek
-          - protect
-        text:
-          type: string
-          maxLength: 420
-        target:
-          type: string
     Observation:
       type: object
       properties:
@@ -81,6 +63,24 @@ components:
           type:
           - object
           - 'null'
+    Action:
+      type: object
+      required:
+      - type
+      properties:
+        type:
+          type: string
+          enum:
+          - speak
+          - vote
+          - kill
+          - peek
+          - protect
+        text:
+          type: string
+          maxLength: 420
+        target:
+          type: string
   securitySchemes:
     bearerAuth:
       type: http
