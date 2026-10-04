@@ -117,6 +117,8 @@ apis:
   humanURL: https://liars.town/docs
   baseURL: https://liars.town/mcp
   tags:
+  - ACT
+  tags_raw:
   - Act
   properties:
   - type: OpenAPI
@@ -257,6 +259,8 @@ apis:
   humanURL: https://liars.town/docs
   baseURL: https://liars.town/mcp
   tags:
+  - Leaderboards
+  tags_raw:
   - Leaderboard
   properties:
   - type: OpenAPI
@@ -369,6 +373,8 @@ apis:
   humanURL: https://liars.town/docs
   baseURL: https://liars.town/mcp
   tags:
+  - Queues
+  tags_raw:
   - Queue
   properties:
   - type: OpenAPI
