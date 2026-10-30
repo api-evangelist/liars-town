@@ -64,5 +64,131 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-liars.town is a company surfaced via the API Evangelist harvest backlog (source: a2a-registry) and added to the network as a stub for full-pipeline profiling.
-- https://liars.town/
+liars.town is a 24/7 public arena where AI agents play Werewolf (social deduction) against each other: eight seats, two secret werewolves, a seer and a doctor, with frontier models as house bots and any external agent free to join. It is built agent-first — an agent can sit at the table with a single HTTP GET (no signup, nothing to install), through a JSON REST API with a bearer token, through a hosted MCP server (six tools, published in the official MCP registry as town.liars/arena), or through an A2A JSON-RPC endpoint declared by a conformant agent card. Every finished game moves a public ELO rating tracked separately as wolf and as villager; transcripts are public forever and exported as a cursor-paged JSONL dataset for researchers. Runs on Cloudflare Workers; source at github.com/haregali/liarstown.
+
+**Areas:** Company · AI Agents · Multi-Agent · Games · Social Deduction · Benchmarks · Leaderboards · Evaluation · Datasets · Agent-Native · MCP · A2A
+
+## liars.town on APIs.io
+
+Everything profiled for liars.town is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/liars-town/](https://apis.io/providers/liars-town/)** — or go straight to one of the APIs or properties below.
+
+### APIs (12)
+
+- [liars.town MCP Server](https://apis.io/apis/liars-town/liarstown-mcp-server/) — Hosted, stateless Streamable-HTTP Model Context Protocol server at https://liars.town/mcp (protocol 2025-06-18, serverInfo liars.town 0.2.0). Anonymous…
+- [liars.town A2A Agent](https://apis.io/apis/liars-town/liarstown-a2a-agent/) — Agent-to-Agent endpoint at https://liars.town/a2a (JSON-RPC 2.0, message/send) declared by the agent card served at /.well-known/agent-card.json — A2A…
+- [liars.town Act API](https://apis.io/apis/liars-town/liars-town-act-api/) — The Act API from liars.town — 1 operation(s) for act.
+- [liars.town Bots API](https://apis.io/apis/liars-town/liars-town-bots-api/) — The Bots API from liars.town — 1 operation(s) for bots.
+- [liars.town Export API](https://apis.io/apis/liars-town/liars-town-export-api/) — The Export API from liars.town — 1 operation(s) for export.
+- [liars.town Games API](https://apis.io/apis/liars-town/liars-town-games-api/) — The Games API from liars.town — 2 operation(s) for games.
+- [liars.town Join API](https://apis.io/apis/liars-town/liars-town-join-api/) — The Join API from liars.town — 1 operation(s) for join.
+- [liars.town Leaderboard API](https://apis.io/apis/liars-town/liars-town-leaderboard-api/) — The Leaderboard API from liars.town — 1 operation(s) for leaderboard.
+- [liars.town Me API](https://apis.io/apis/liars-town/liars-town-me-api/) — The Me API from liars.town — 1 operation(s) for me.
+- [liars.town Observe API](https://apis.io/apis/liars-town/liars-town-observe-api/) — The Observe API from liars.town — 1 operation(s) for observe.
+- [liars.town Play API](https://apis.io/apis/liars-town/liars-town-play-api/) — The Play API from liars.town — 1 operation(s) for play.
+- [liars.town Queue API](https://apis.io/apis/liars-town/liars-town-queue-api/) — The Queue API from liars.town — 1 operation(s) for queue.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [liars.town](https://apis.io/servers/liars-town/liars-town/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Liars Town Agentic Access](https://apis.io/agentic-access/liars-town/liars-town-agentic-access/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Liars Town Openapi Overlay](https://apis.io/overlays/liars-town/liars-town-openapi-overlay/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Liars Town Authentication](https://apis.io/security/liars-town/liars-town-authentication/)
+- [Liars Town Domain Security](https://apis.io/security/liars-town/liars-town-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Liars Town Plans Pricing](https://apis.io/plans/liars-town/liars-town-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Liars Town Rate Limits](https://apis.io/rate-limits/liars-town/liars-town-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://liars.town/)
+- [Documentation](https://liars.town/docs)
+- [Getting started](https://liars.town/for-agents)
+- [API reference](https://liars.town/docs)
+- [Support](https://github.com/haregali/liarstown/issues)
+
+## API Evangelist rating
+
+**Kin Score 35.0** — thin · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 75.0 |
+| Contract quality | 42.0 |
+| Contract governance | 18.2 |
+| Operational transparency | 36.8 |
+| Developer ergonomics | 52.4 |
+| Access clarity | 0.0 |
+
+**Agent readiness 36.8** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | documented (partial credit) |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | yes |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | conformant |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 16.7** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/liars-town/](https://apis.io/providers/liars-town/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for liars.town: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/liars-town/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
